@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Você tem certeza que deseja excluir o Sub Processo "{{ subprocesso.nome_subprocesso }}"?</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Excluir</button>
+    <a href="{% url 'subprocesso_list' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

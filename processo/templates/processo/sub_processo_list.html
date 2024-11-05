@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Sub Processos</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Sub Processo</th>
+                            <th>Sub Processo Parents</th>
+                            <th>Ação</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Sub Processo</th>
+                            <th>Sub Processo Parents</th>
+                            <th>Ação</th>
+                        </tr>     
+                    </tfoot>
+                    <tbody>
+                        {% for subprocesso in subprocessos %}
+                        <tr>
+                            <td>{{ subprocesso.nome_subprocesso }}</td>
+                            <td>
+                                {% if subprocesso.parent_subprocesso.all %}
+                                    {% for parent_subprocesso in subprocesso.parent_subprocesso.all %}
+                                        {{ parent_subprocesso.nome_subprocesso }}, <br> 
+                                    {% endfor %}
+                                {% else %}
+                                    Sem SubProcesso
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'subprocesso_detail' pk=subprocesso.pk %}" class="btn btn-info btn-circle btn-sm">
+                                    <i class="fas fa-info-circle"></i>
+                                </a> 
+                                <a href="{% url 'subprocesso_edit' pk=subprocesso.pk %}" class="btn btn-warning btn-circle btn-sm">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </a>
+                                <a href="{% url 'subprocesso_delete' subprocesso.pk %}" class="btn btn-danger btn-circle btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

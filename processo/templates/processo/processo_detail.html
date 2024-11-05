@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Processo</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>Processo</td>
+                            <td>{{ processo.nome_processo }}</td>
+                        </tr>
+                        <tr>
+                            <td>SubProcessos</td>
+                            <td>
+                                {% if processo.subprocesso.all %}
+                                    {% for subprocesso in processo.subprocesso.all %}
+                                        {{ subprocesso.nome_subprocesso }}, <br> 
+                                    {% endfor %}
+                                {% else %}
+                                    Sem SubProcesso
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ferramenta Utilizada</td>
+                            <td>{{ processo.ferramenta_utilizada }}</td>
+                        </tr>
+                        <tr>
+                            <td>Responsável</td>
+                            <td>{{ processo.responsavel }}</td>
+                        </tr>
+                        <tr>
+                            <td>Documentação</td>
+                            <td>{{ processo.documentacao }}</td>
+                        </tr>
+                        <tr>
+                            <td>Área</td>
+                            <td>{{ processo.area }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
