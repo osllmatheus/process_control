@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Processo</h6>
+        </div>
+        <form method="POST" class="post-form">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>Processo</td>
+                            <td>{{ form.nome_processo }}</td>
+                        </tr>
+                        <tr>
+                            <td>SubProcessos</td>
+                            <td>{{ form.subprocesso }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ferramenta Utilizada</td>
+                            <td>{{ form.ferramenta_utilizada }}</td>
+                        </tr>
+                        <tr>
+                            <td>Responsável</td>
+                            <td>{{ form.responsavel }}</td>
+                        </tr>
+                        <tr>
+                            <td>Documentação</td>
+                            <td>{{ form.documentacao }}</td>
+                        </tr>
+                        <tr>
+                            <td>Área</td>
+                            <td>{{ form.area }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% csrf_token %} <button type="submit" class="btn btn-success btn-icon-split">Save</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

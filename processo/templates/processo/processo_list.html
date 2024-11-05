@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Processos</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Processo</th>
+                            <th>SubProcessos</th>
+                            <th>Ferramenta Utilizada</th>
+                            <th>Responsável</th>
+                            <th>Documentação</th>
+                            <th>Área</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Processo</th>
+                            <th>SubProcessos</th>
+                            <th>Ferramenta Utilizada</th>
+                            <th>Responsável</th>
+                            <th>Documentação</th>
+                            <th>Área</th>
+                            <th>Acão</th>
+                        </tr>     
+                    </tfoot>
+                    <tbody>
+                        {% for processo in processos %}
+                        <tr>
+                            <td>{{ processo.nome_processo }}</td>
+                            <td>
+                                {% if processo.subprocesso.all %}
+                                    {% for subprocesso in processo.subprocesso.all %}
+                                        {{ subprocesso.nome_subprocesso }}, <br> 
+                                    {% endfor %}
+                                {% else %}
+                                    Sem SubProcesso
+                                {% endif %}
+                            </td>
+                            <td>{{ processo.ferramenta_utilizada }}</td>
+                            <td>{{ processo.responsavel }}</td>
+                            <td>{{ processo.documentacao }}</td>
+                            <td>{{ processo.area }}</td>
+                            <td>
+                                <a href="{% url 'processo_detail' pk=processo.pk %}" class="btn btn-info btn-circle btn-sm">
+                                    <i class="fas fa-info-circle"></i>
+                                </a> 
+                                <a href="{% url 'processo_edit' pk=processo.pk %}" class="btn btn-warning btn-circle btn-sm">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </a>
+                                <a href="{% url 'processo_delete' pk=processo.pk %}" class="btn btn-danger btn-circle btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
