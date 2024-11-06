@@ -8,20 +8,26 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Sub Processos</h6>
         </div>
+        <form action="{% url 'subprocesso_new' %}" method="get">
+            <button type="submit" class="btn btn-primary btn-icon-split">Novo</button>
+        </form>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Sub Processo</th>
+                            <th>Status</th>
+                            <th>Processo</th>
                             <th>Sub Processo Parents</th>
                             <th>Ação</th>
-
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Sub Processo</th>
+                            <th>Status</th>
+                            <th>Processo</th>
                             <th>Sub Processo Parents</th>
                             <th>Ação</th>
                         </tr>     
@@ -30,13 +36,13 @@
                         {% for subprocesso in subprocessos %}
                         <tr>
                             <td>{{ subprocesso.nome_subprocesso }}</td>
-                            <td>
-                                {% if subprocesso.parent_subprocesso.all %}
-                                    {% for parent_subprocesso in subprocesso.parent_subprocesso.all %}
-                                        {{ parent_subprocesso.nome_subprocesso }}, <br> 
-                                    {% endfor %}
-                                {% else %}
-                                    Sem SubProcesso
+                            <td>{{ subprocesso.get_status_display  }}</td>
+                            <td>{% if subprocesso.processo %}
+                                    {{ subprocesso.processo }}
+                                {% endif %}
+                            </td>
+                            <td>{% if subprocesso.parent_subprocesso %}
+                                    {{ subprocesso.parent_subprocesso }}
                                 {% endif %}
                             </td>
                             <td>

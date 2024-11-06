@@ -8,6 +8,9 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Sub Processos</h6>
         </div>
+        <form action="{% url 'subprocesso_list' %}" method="get">
+            <button type="submit" class="btn btn-primary btn-icon-split">Voltar</button>
+        </form>
         <form method="POST" class="post-form">
         <div class="card-body">
             <div class="table-responsive">
@@ -18,8 +21,16 @@
                             <td>{{ form.nome_subprocesso }}</td>
                         </tr>
                         <tr>
+                            <td>Status</td>
+                            <td>{{ form.status}}</td>
+                        </tr>
+                        <tr>
                             <td>SubProcesso Parents</td>
                             <td>{{ form.parent_subprocesso}}</td>
+                        </tr>
+                        <tr>
+                            <td>Processo</td>
+                            <td>{{ form.processo}}</td>
                         </tr>
                     </tbody>
                 </table>
