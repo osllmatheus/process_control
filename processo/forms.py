@@ -7,7 +7,7 @@ class ProcessoForm(forms.ModelForm):
     class Meta:
         model = Processo
         fields = ('nome_processo','ferramenta_utilizada',
-                  'responsavel','documentacao','subprocesso','area')
+                  'responsavel','documentacao','area')
         widgets = {
             'subprocesso' : forms.CheckboxSelectMultiple,
         }
