@@ -39,7 +39,7 @@ class Processo(models.Model):
     ferramenta_utilizada = models.CharField(max_length=400)
     responsavel = models.CharField(max_length=400)
     documentacao = models.CharField(max_length=400)
-    area = models.ForeignKey(Area, on_delete=models.CASCADE, null=True, blank=True, related_name='processos')
+    area = models.ForeignKey(Area, on_delete=models.CASCADE, related_name='processos')
 
     def __str__(self):
         return self.nome_processo
