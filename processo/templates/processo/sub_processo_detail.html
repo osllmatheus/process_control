@@ -21,15 +21,7 @@
                         </tr>
                         <tr>
                             <td>SubProcesso Parents</td>
-                            <td>
-                                {% if subprocesso.parent_subprocesso.all %}
-                                    {% for parent_subprocesso in subprocesso.parent_subprocesso.all %}
-                                        {{ parent_subprocesso.nome_subprocesso }}, <br> 
-                                    {% endfor %}
-                                {% else %}
-                                    Sem SubProcesso
-                                {% endif %}
-                            </td>
+                            <td>{{ subprocesso.get_status_display }}</td>
                         </tr>
                     </tbody>
                 </table>
