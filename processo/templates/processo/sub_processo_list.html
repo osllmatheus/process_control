@@ -17,14 +17,15 @@
                     <thead>
                         <tr>
                             <th>Sub Processo</th>
+                            <th>Processo</th>
                             <th>Sub Processo Parents</th>
                             <th>Ação</th>
-
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Sub Processo</th>
+                            <th>Processo</th>
                             <th>Sub Processo Parents</th>
                             <th>Ação</th>
                         </tr>     
@@ -33,13 +34,12 @@
                         {% for subprocesso in subprocessos %}
                         <tr>
                             <td>{{ subprocesso.nome_subprocesso }}</td>
-                            <td>
-                                {% if subprocesso.parent_subprocesso.all %}
-                                    {% for parent_subprocesso in subprocesso.parent_subprocesso.all %}
-                                        {{ parent_subprocesso.nome_subprocesso }}, <br> 
-                                    {% endfor %}
-                                {% else %}
-                                    Sem SubProcesso
+                            <td>{% if subprocesso.processo %}
+                                    {{ subprocesso.processo }}
+                                {% endif %}
+                            </td>
+                            <td>{% if subprocesso.parent_subprocesso %}
+                                    {{ subprocesso.parent_subprocesso }}
                                 {% endif %}
                             </td>
                             <td>

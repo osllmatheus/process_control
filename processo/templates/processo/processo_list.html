@@ -41,13 +41,11 @@
                         <tr>
                             <td>{{ processo.nome_processo }}</td>
                             <td>
-                                {% if processo.subprocesso.all %}
-                                    {% for subprocesso in processo.subprocesso.all %}
-                                        {{ subprocesso.nome_subprocesso }}, <br> 
-                                    {% endfor %}
-                                {% else %}
-                                    Sem SubProcesso
-                                {% endif %}
+                                {% for subprocesso in processo.subprocessos.all %}
+                                    {{ subprocesso.nome_subprocesso }}, <br> 
+                                {% empty %}
+                                    Sem subprocessos
+                                {% endfor %}
                             </td>
                             <td>{{ processo.ferramenta_utilizada }}</td>
                             <td>{{ processo.responsavel }}</td>
