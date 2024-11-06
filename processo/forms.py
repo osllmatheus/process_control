@@ -12,4 +12,4 @@ class ProcessoForm(forms.ModelForm):
 class SubProcessoForm(forms.ModelForm):
     class Meta:
         model = SubProcesso
-        fields = ('nome_subprocesso','processo','parent_subprocesso')
+        fields = ('nome_subprocesso','status','processo','parent_subprocesso')
