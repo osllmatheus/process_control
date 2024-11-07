@@ -22,13 +22,14 @@
                         <tr>
                             <td>SubProcessos</td>
                             <td>
-                                {% if processo.subprocesso.all %}
-                                    {% for subprocesso in processo.subprocesso.all %}
-                                        {{ subprocesso.nome_subprocesso }}, <br> 
-                                    {% endfor %}
-                                {% else %}
-                                    Sem SubProcesso
-                                {% endif %}
+                                {% for subprocesso in processo.subprocessos.all %}
+                                    {{ subprocesso.nome_subprocesso }}, <br>
+                                        {% if subprocesso.subprocessos_filhos.all %}
+                                            {% for filho in subprocesso.subprocessos_filhos.all %}
+                                                {{ filho.nome_subprocesso }}, <br>
+                                            {% endfor %}
+                                        {% endif %}
+                                {% endfor %}  
                             </td>
                         </tr>
                         <tr>
