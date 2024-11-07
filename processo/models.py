@@ -1,12 +1,14 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from mptt.models import MPTTModel, TreeForeignKey
 from area.models import Area
 
 # Modelo SubProcesso
-class SubProcesso(models.Model):
+class SubProcesso(MPTTModel):
     nome_subprocesso = models.CharField(max_length=200)
     processo = models.ForeignKey('Processo', related_name='subprocessos', on_delete=models.CASCADE, null=True, blank=True)
-    parent_subprocesso = models.ForeignKey('self', null=True, blank=True, related_name='subprocessos_filhos', on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='subprocessos_filhos', on_delete=models.CASCADE)
+
 
     STATUS_OPCOES = [
         ('P', 'Pendente'),
@@ -21,8 +23,12 @@ class SubProcesso(models.Model):
         default='P',
     )
     
+    class MPTTMeta:
+        order_insertion_by = ['nome_subprocesso']  # Pode ordenar os subprocessos na árvore
+
+    
     def clean(self):
-        if self.processo and self.parent_subprocesso:
+        if self.processo and self.parent:
             raise ValidationError("Subprocesso com um processo não pode ter filhos com processo.")
 
     def save(self, *args, **kwargs):

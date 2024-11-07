@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'area',
     'processo',
     'dashboard',
+    'mptt',
 ]
 
 MIDDLEWARE = [

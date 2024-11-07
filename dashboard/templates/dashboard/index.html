@@ -84,7 +84,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Pendentes</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{num_pendente}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -106,40 +106,39 @@
                             </form>
                         </div>
                     </div>
-
-                    {% for processo in processos %}
-                        <!-- Area Chart -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">{{processo.area}} - {{processo.nome_processo}}</h6>
+                    
+                    {% load mptt_tags %}
+                        {% for processo, subprocessos in estrutura_processos.items %}
+                            <!-- Area Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">- {{processo}}</h6>
+                                </div>
+                                <div class="card-body">
+                                    Ferramenta Utilizada :  <br>
+                                    Responsável :  <br>
+                                    Documentação :  <br>
+                                </div>
+                                <div class="card-body">
+                                    {% recursetree subprocessos %}
+                                    <li>
+                                        <strong>Subprocesso:</strong> {{ node.nome_subprocesso }} - status <a href="#" class="btn btn-circle btn-sm">
+                                            <i class="fas fa-check"></i>
+                                        </a><br>                                    
+                                            {% if not node.is_leaf_node %}
+                                                <ul class="children">        
+                                                    {{ children }}
+                                                </ul>
+                                            {% endif %}
+                                    </li>
+                                    {% endrecursetree %}
+                                </div>
                             </div>
-                            <div class="card-body">
-                                Ferramenta Utilizada : {{processo.ferramenta_utilizada}} <br>
-                                Responsável : {{processo.responsavel}} <br>
-                                Documentação : {{processo.Documentação}} <br>
-                            </div>
-                            <div class="card-body">
-                                {% for subprocesso in processo.subprocessos.all %}
-                                <li>
-                                    <strong>Subprocesso:</strong> {{ subprocesso.nome_subprocesso }} - {{ subprocesso.get_status_display }} <a href="{% url 'subprocesso_edit' pk=subprocesso.pk %}" class="btn btn-circle btn-sm">
-                                        <i class="fas fa-check"></i>
-                                    </a><br>
-                                    {% if subprocesso.subprocessos_filhos.all %}
-                                        <ul>
-                                            {% for filho in subprocesso.subprocessos_filhos.all %}
-                                                <li>
-                                                    <strong>Subprocesso:</strong> {{ filho.nome_subprocesso }} - {{ filho.get_status_display }} <a href="{% url 'subprocesso_edit' pk=filho.pk %}" class="btn btn-circle btn-sm">
-                                                        <i class="fas fa-check"></i>
-                                                    </a><br>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}  
-                            </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    
                 </div>
                 <!-- /.container-fluid -->
 {% endblock %}
+
+
+            
