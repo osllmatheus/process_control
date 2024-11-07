@@ -22,11 +22,11 @@ def dashboard(request):
         if subprocesso:
             processos = processos.filter(Q(subprocessos__nome_subprocesso=subprocesso) | 
                                         Q(subprocessos__subprocessos_filhos__nome_subprocesso=subprocesso)
-                                    )
+                                    ).distinct()
     
     num_areas = processos.values('area').distinct().count()
-    num_subprocessos = processos.prefetch_related('subprocesso').count()
     num_processos = processos.count()
+    num_subprocessos = processos.prefetch_related('subprocesso').count()
     
     return render(request, 'dashboard/index.html', {
         'form': form,

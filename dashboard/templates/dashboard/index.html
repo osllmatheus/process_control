@@ -37,7 +37,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 SubProcessos</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">`{{num_subprocessos}}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{num_subprocessos}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -99,8 +99,10 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <form method="get">
-                                {{ form.as_p }}
-                                <button type="submit">Filtrar</button>
+                                {{ form.area}}
+                                {{ form.processo}}
+                                {{ form.subprocesso}}
+                                <button type="submit" class="btn btn-primary btn-icon-split">Filtrar</button>
                             </form>
                         </div>
                     </div>
@@ -112,23 +114,23 @@
                                 <h6 class="m-0 font-weight-bold text-primary">{{processo.area}} - {{processo.nome_processo}}</h6>
                             </div>
                             <div class="card-body">
-                                Ferramenta Utilizada : {{processo.ferramenta_utilizada}}
-                                Responsável : {{processo.responsavel}}
-                                Documentação : {{processo.Documentação}}
+                                Ferramenta Utilizada : {{processo.ferramenta_utilizada}} <br>
+                                Responsável : {{processo.responsavel}} <br>
+                                Documentação : {{processo.Documentação}} <br>
                             </div>
-                            <div>
+                            <div class="card-body">
                                 {% for subprocesso in processo.subprocessos.all %}
                                 <li>
-                                    <strong>Subprocesso:</strong> {{ subprocesso.nome_subprocesso }}<br>
-                                    <strong>Status:</strong> {{ subprocesso.get_status_display }}<br>
-    
+                                    <strong>Subprocesso:</strong> {{ subprocesso.nome_subprocesso }} - {{ subprocesso.get_status_display }} <a href="{% url 'subprocesso_edit' pk=subprocesso.pk %}" class="btn btn-circle btn-sm">
+                                        <i class="fas fa-check"></i>
+                                    </a><br>
                                     {% if subprocesso.subprocessos_filhos.all %}
-                                        <h4>Subprocessos Filhos:</h4>
                                         <ul>
                                             {% for filho in subprocesso.subprocessos_filhos.all %}
                                                 <li>
-                                                    <strong>Filho Subprocesso:</strong> {{ filho.nome_subprocesso }}<br>
-                                                    <strong>Status:</strong> {{ filho.get_status_display }}
+                                                    <strong>Subprocesso:</strong> {{ filho.nome_subprocesso }} - {{ filho.get_status_display }} <a href="{% url 'subprocesso_edit' pk=filho.pk %}" class="btn btn-circle btn-sm">
+                                                        <i class="fas fa-check"></i>
+                                                    </a><br>
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -138,52 +140,6 @@
                             </div>
                         </div>
                     {% endfor %}
-
-                    <div class="row">
-                        <!-- Content Column -->
-                        <div class="col-xl-4 col-lg-7">
-
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">Server Migration <span
-                                            class="float-right">20%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Sales Tracking <span
-                                            class="float-right">40%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Customer Database <span
-                                            class="float-right">60%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Payout Details <span
-                                            class="float-right">80%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Account Setup <span
-                                            class="float-right">Complete!</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
                 <!-- /.container-fluid -->
 {% endblock %}
