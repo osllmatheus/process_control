@@ -8,7 +8,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Sub Processos</h6>
         </div>
         <form action="{% url 'subprocesso_list' %}" method="get">
-            <button type="submit" class="btn btn-primary btn-icon-split">Voltar</button>
+            <button type="submit" class="btn btn-primary btn-icon-split mt-4 ml-4 mr-4 px-5">Voltar</button>
         </form>
         <form method="POST" class="post-form">
         <div class="card-body">
@@ -35,7 +35,7 @@
                 </table>
             </div>
         </div>
-        {% csrf_token %} <button type="submit" class="btn btn-success btn-icon-split">Save</button>
+        {% csrf_token %} <button type="submit" class="btn btn-success btn-icon-split mb-4 ml-4 mr-4 px-5">Save</button>
         </form>
     </div>
 
