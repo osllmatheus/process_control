@@ -23,4 +23,4 @@ class SubProcessoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['parent'].queryset = SubProcesso.objects.all().order_by('lft')  # Ordena os subprocessos por ordem de árvore
+        self.fields['parent'].queryset = SubProcesso.objects.all().order_by('lft')
