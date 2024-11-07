@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from mptt.models import MPTTModel, TreeForeignKey
 from area.models import Area
 
-# Modelo SubProcesso
 class SubProcesso(MPTTModel):
     nome_subprocesso = models.CharField(max_length=200)
     processo = models.ForeignKey('Processo', related_name='subprocessos', on_delete=models.CASCADE, null=True, blank=True)
@@ -39,7 +38,6 @@ class SubProcesso(MPTTModel):
         return self.nome_subprocesso
 
 
-# Modelo Processo
 class Processo(models.Model):
     nome_processo = models.CharField(max_length=200)
     ferramenta_utilizada = models.CharField(max_length=400)
