@@ -20,8 +20,12 @@
                             <td>{{ subprocesso.nome_subprocesso }}</td>
                         </tr>
                         <tr>
-                            <td>SubProcesso Parents</td>
+                            <td>Status</td>
                             <td>{{ subprocesso.get_status_display }}</td>
+                        </tr>
+                        <tr>
+                            <td>SubProcesso Parents</td>
+                            <td>{{ subprocesso.parent }}</td>
                         </tr>
                     </tbody>
                 </table>
